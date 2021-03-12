@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Apartment;
 
@@ -16,7 +17,10 @@ class ApartmentController extends Controller
      */
     public function index(Request $request)
     {
-        $response = Apartment::where("user_id", $request->user_id)->get();
+        // $response = Apartment::where("user_id", $request->user_id)->get();
+        $response = DB::table('apartments')
+            ->where("user_id", $request->user_id)
+            ->get();
         return response($response, 201);
     }
 
@@ -65,7 +69,11 @@ class ApartmentController extends Controller
      */
     public function show($id, Request $request)
     {
-        $response = Apartment::where('user_id', '=', $request->user_id)
+        // $response = Apartment::where('user_id', '=', $request->user_id)
+        // ->where('id', '=', $id)
+        // ->get();
+        $response = DB::table('apartments')
+        ->where("user_id", $request->user_id)
         ->where('id', '=', $id)
         ->get();
         return response($response, 201);
@@ -93,15 +101,25 @@ class ApartmentController extends Controller
     {
         $data = $request->all();
 
-        $property = Apartment::find($id);
+        // $property = Apartment::find($id);
+        $property = DB::table('apartments')
+              ->where('id', $id)
+              ->update(
+                [
+                  'title' => $data["title"],
+                  'description' => $data["description"],
+                  'rooms_number' => $data["rooms_number"],
+                  'price' =>  $data["price"],
+                  'img' => $data["img"],
+                ]);
 
-        $property->title = $data["title"];
-        $property->description = $data["description"];
-        $property->rooms_number = $data["rooms_number"];
-        $property->price = $data["price"];
-        $property->img = $data["img"];
+        // $property->title = $data["title"];
+        // $property->description = $data["description"];
+        // $property->rooms_number = $data["rooms_number"];
+        // $property->price = $data["price"];
+        // $property->img = $data["img"];
 
-        $property->update();
+        // $property->update();
 
         return response(['response' => 'success updated']);
     }
