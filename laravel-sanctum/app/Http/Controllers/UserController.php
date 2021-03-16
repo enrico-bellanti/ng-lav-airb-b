@@ -36,7 +36,7 @@ class UserController extends Controller
         if ((!$request->email) || (!$request->name) || (!$request->password)) {
             $response = Response::json([
                 'message' => 'Please enter all required fields'
-            ], 422);
+            ], 400);
             return $response;
         }
         $user = new User(array(

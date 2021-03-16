@@ -1,0 +1,19 @@
+.card_deck{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.col-x{
+    width: calc((100% / 3) - 30px);
+    margin: 15px;
+}
+
+.card{
+    min-height: 440px;
+}
+
+.card_img_top{
+    height: 250px;
+    object-fit: cover;
+}

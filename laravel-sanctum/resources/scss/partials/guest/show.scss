@@ -1,0 +1,10 @@
+.card_show_container{
+    margin: auto;
+    width: 80%;
+        .card{
+            .card_img_show{
+                max-height: 450px;
+                object-fit: cover;
+            }
+        }
+}

@@ -28,5 +28,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post("login",[UserController::class,'login']);
 Route::post("register",[UserController::class,'store']);
-Route::get("home",[ApartmentController::class,'index']);
+
+// ApartmentController Guest
+Route::get("apartments/{pages}",[ApartmentController::class,'index']);
+Route::get("apartments/show/{id}",[ApartmentController::class,'show']);
+
 
